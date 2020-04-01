@@ -18,7 +18,7 @@ export default class App extends Component {
   render() {
     return (
       <View>
-        <View style={[Styles.Container, {zIndex: 1}]}>
+        <View style={[Styles.Container, {zIndex: 0}]}>
           <ButtonCmpt
             disabled={null}
             handleFunction={() => {
