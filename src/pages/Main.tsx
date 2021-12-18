@@ -1,10 +1,12 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
+
+import SwipeButton from "../components/SwipeButton";
 
 const Main: React.FC = () => {
   return (
-    <View>
-      <Text>Hello world!</Text>
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <SwipeButton />
     </View>
   );
 };
