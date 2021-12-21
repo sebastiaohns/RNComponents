@@ -22,7 +22,7 @@ const SWIPEABLE_DIMENSIONS = BUTTON_HEIGHT - 2 * BUTTON_PADDING;
 const H_WAVE_RANGE = SWIPEABLE_DIMENSIONS + 2 * BUTTON_PADDING;
 const H_SWIPE_RANGE = BUTTON_WIDTH - 2 * BUTTON_PADDING - SWIPEABLE_DIMENSIONS;
 
-const SwipeButton = (props: any) => {
+const SwipeButton = () => {
   // Animated value for X translation
   const X = useSharedValue(0);
   // Toggled State
