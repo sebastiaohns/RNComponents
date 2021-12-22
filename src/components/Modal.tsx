@@ -1,5 +1,5 @@
-import React, { forwardRef, useCallback, useEffect, useState } from "react";
-import { Dimensions, Platform, StatusBar, StyleSheet } from "react-native";
+import React, { forwardRef } from "react";
+import { Dimensions, StyleSheet } from "react-native";
 import { PanGestureHandler } from "react-native-gesture-handler";
 import Animated, {
   useSharedValue,
