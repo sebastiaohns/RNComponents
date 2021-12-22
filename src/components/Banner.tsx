@@ -63,9 +63,9 @@ const Banner = React.forwardRef((props: IProps, ref) => {
   // value and function of the banner layout custom hook
   const [bannerLayout, onBannerLayout] = useBannerLayout();
 
-  // Custom animated styles for shadow and modal components
+  // Custom animated styles for shadow and banner components
   const AnimatedStyles = {
-    modal: useAnimatedStyle(() => {
+    banner: useAnimatedStyle(() => {
       return {
         bottom: bottom.value,
       };
@@ -78,7 +78,7 @@ const Banner = React.forwardRef((props: IProps, ref) => {
     }),
   };
 
-  // Function to handle shadow and modal style properties when open action is
+  // Function to handle shadow and banner style properties when open action is
   // triggered
   const openBanner = () => {
     shadowZIndex.value = 2;
@@ -88,7 +88,7 @@ const Banner = React.forwardRef((props: IProps, ref) => {
     });
   };
 
-  // Function to handle shadow and modal style properties when close action is
+  // Function to handle shadow and banner style properties when close action is
   // triggered
   const closeBanner = () => {
     bottom.value = withTiming(-bannerHeight);
@@ -99,10 +99,6 @@ const Banner = React.forwardRef((props: IProps, ref) => {
       duration: 200,
     });
   };
-
-  function showMessage(message: String) {
-    console.log(message);
-  }
 
   // Hook to calculate banner main content height and banner bottom position of
   // the banner
@@ -128,7 +124,7 @@ const Banner = React.forwardRef((props: IProps, ref) => {
         <Animated.View style={[styles.shadow, AnimatedStyles.shadow]} />
       </PanGestureHandler>
       <Animated.View
-        style={[styles.modal, AnimatedStyles.modal]}
+        style={[styles.banner, AnimatedStyles.banner]}
         onLayout={onBannerLayout}
       >
         {props.content}
@@ -145,7 +141,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#000",
   },
 
-  modal: {
+  banner: {
     zIndex: 3,
     position: "absolute",
   },

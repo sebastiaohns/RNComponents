@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { FC, useRef } from "react";
 import { Pressable, Text, View } from "react-native";
 
 import Banner from "../components/Banner";
@@ -8,9 +8,7 @@ interface IBanner {
   closeBanner: Function;
 }
 
-const BannerContent: React.FC<{ handleAction: Function }> = ({
-  handleAction,
-}) => {
+const BannerContent: FC<{ handleAction: Function }> = ({ handleAction }) => {
   return (
     <View
       style={{
@@ -30,7 +28,7 @@ const BannerContent: React.FC<{ handleAction: Function }> = ({
   );
 };
 
-const BannerMain: React.FC = () => {
+const BannerMain: FC = () => {
   const bannerRef = useRef<IBanner>();
 
   function openBanner() {

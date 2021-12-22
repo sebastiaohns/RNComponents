@@ -1,9 +1,9 @@
-import React from "react";
+import React, { FC } from "react";
 import { View } from "react-native";
 
 import SwipeButton from "../components/SwipeButton";
 
-const Main: React.FC = () => {
+const Main: FC = () => {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <SwipeButton />
