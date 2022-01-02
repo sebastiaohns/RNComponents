@@ -13,9 +13,6 @@ const Numpad = (props: { value: string; onChange: Function }) => {
   const [value, setValue] = useState("");
 
   const handleChange = (text: String) => {
-    if (value == "" && text == "0") {
-      return null;
-    }
     setValue(value + text);
   };
 
@@ -28,11 +25,11 @@ const Numpad = (props: { value: string; onChange: Function }) => {
   }, [value]);
 
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.row}>
         <TouchableHighlight
           onPress={() => handleChange("7")}
-          underlayColor="rgba(0, 0, 0, 0.1)"
+          underlayColor="rgba(254, 208, 82, 0.2)"
           delayPressOut={100}
           style={styles.key}
         >
@@ -40,7 +37,7 @@ const Numpad = (props: { value: string; onChange: Function }) => {
         </TouchableHighlight>
         <TouchableHighlight
           onPress={() => handleChange("8")}
-          underlayColor="rgba(0, 0, 0, 0.1)"
+          underlayColor="rgba(254, 208, 82, 0.2)"
           delayPressOut={100}
           style={styles.key}
         >
@@ -48,7 +45,7 @@ const Numpad = (props: { value: string; onChange: Function }) => {
         </TouchableHighlight>
         <TouchableHighlight
           onPress={() => handleChange("9")}
-          underlayColor="rgba(0, 0, 0, 0.1)"
+          underlayColor="rgba(254, 208, 82, 0.2)"
           delayPressOut={100}
           style={styles.key}
         >
@@ -59,7 +56,7 @@ const Numpad = (props: { value: string; onChange: Function }) => {
       <View style={styles.row}>
         <TouchableHighlight
           onPress={() => handleChange("4")}
-          underlayColor="rgba(0, 0, 0, 0.1)"
+          underlayColor="rgba(254, 208, 82, 0.2)"
           delayPressOut={100}
           style={styles.key}
         >
@@ -67,7 +64,7 @@ const Numpad = (props: { value: string; onChange: Function }) => {
         </TouchableHighlight>
         <TouchableHighlight
           onPress={() => handleChange("5")}
-          underlayColor="rgba(0, 0, 0, 0.1)"
+          underlayColor="rgba(254, 208, 82, 0.2)"
           delayPressOut={100}
           style={styles.key}
         >
@@ -75,7 +72,7 @@ const Numpad = (props: { value: string; onChange: Function }) => {
         </TouchableHighlight>
         <TouchableHighlight
           onPress={() => handleChange("6")}
-          underlayColor="rgba(0, 0, 0, 0.1)"
+          underlayColor="rgba(254, 208, 82, 0.2)"
           delayPressOut={100}
           style={styles.key}
         >
@@ -86,7 +83,7 @@ const Numpad = (props: { value: string; onChange: Function }) => {
       <View style={styles.row}>
         <TouchableHighlight
           onPress={() => handleChange("1")}
-          underlayColor="rgba(0, 0, 0, 0.1)"
+          underlayColor="rgba(254, 208, 82, 0.2)"
           delayPressOut={100}
           style={styles.key}
         >
@@ -94,7 +91,7 @@ const Numpad = (props: { value: string; onChange: Function }) => {
         </TouchableHighlight>
         <TouchableHighlight
           onPress={() => handleChange("2")}
-          underlayColor="rgba(0, 0, 0, 0.1)"
+          underlayColor="rgba(254, 208, 82, 0.2)"
           delayPressOut={100}
           style={styles.key}
         >
@@ -102,7 +99,7 @@ const Numpad = (props: { value: string; onChange: Function }) => {
         </TouchableHighlight>
         <TouchableHighlight
           onPress={() => handleChange("3")}
-          underlayColor="rgba(0, 0, 0, 0.1)"
+          underlayColor="rgba(254, 208, 82, 0.2)"
           delayPressOut={100}
           style={styles.key}
         >
@@ -117,7 +114,7 @@ const Numpad = (props: { value: string; onChange: Function }) => {
         </TouchableHighlight>
         <TouchableHighlight
           onPress={() => handleChange("0")}
-          underlayColor="rgba(0, 0, 0, 0.1)"
+          underlayColor="rgba(254, 208, 82, 0.2)"
           delayPressOut={100}
           style={styles.key}
         >
@@ -125,7 +122,7 @@ const Numpad = (props: { value: string; onChange: Function }) => {
         </TouchableHighlight>
         <TouchableHighlight
           onPress={() => handleDelete()}
-          underlayColor="rgba(0, 0, 0, 0.1)"
+          underlayColor="rgba(254, 95, 85, 0.2)"
           delayPressOut={100}
           style={styles.key}
         >
@@ -146,11 +143,17 @@ const keyWidth = width * 0.22;
 const keyHeight = keyWidth;
 
 const styles = StyleSheet.create({
-  row: {
+  container: {
     width: "100%",
     height: "auto",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  row: {
+    width: "100%",
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
   },
 
   key: {

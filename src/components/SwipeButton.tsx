@@ -22,101 +22,106 @@ const SWIPEABLE_DIMENSIONS = BUTTON_HEIGHT - 2 * BUTTON_PADDING;
 const H_WAVE_RANGE = SWIPEABLE_DIMENSIONS + 2 * BUTTON_PADDING;
 const H_SWIPE_RANGE = BUTTON_WIDTH - 2 * BUTTON_PADDING - SWIPEABLE_DIMENSIONS;
 
-const SwipeButton = () => {
-  // Animated value for X translation
-  const X = useSharedValue(0);
-  // Toggled State
-  const [toggled, setToggled] = useState(false);
+const SwipeButton = React.forwardRef(
+  (props: { handleFinish: Function }, ref) => {
+    // Animated value for X translation
+    const X = useSharedValue(0);
+    // Toggled State
+    const [toggled, setToggled] = useState(false);
 
-  // Fires when animation ends
-  const handleComplete = () => {
-    setTimeout(() => {
+    // Fires when animation ends
+    const handleFinish = () => {
+      props.handleFinish();
+    };
+
+    const handleStart = () => {
       setToggled(false);
       X.value = 0;
-    }, 1000);
-  };
+    };
 
-  // Gesture Handler Events
-  const animatedGestureHandler = useAnimatedGestureHandler({
-    onStart: (_, ctx: any) => {
-      ctx.completed = toggled;
-    },
-    onActive: (e, ctx) => {
-      let newValue;
-      if (ctx.completed) {
-        newValue = H_SWIPE_RANGE + e.translationX;
-      } else {
-        newValue = e.translationX;
-      }
+    // Gesture Handler Events
+    const animatedGestureHandler = useAnimatedGestureHandler({
+      onStart: (_, ctx: any) => {
+        ctx.completed = toggled;
+      },
+      onActive: (e, ctx) => {
+        let newValue;
+        if (ctx.completed) {
+          newValue = H_SWIPE_RANGE + e.translationX;
+        } else {
+          newValue = e.translationX;
+        }
 
-      if (newValue >= 0 && newValue <= H_SWIPE_RANGE) {
-        X.value = newValue;
-      }
-    },
-    onEnd: () => {
-      if (X.value < BUTTON_WIDTH / 2 - SWIPEABLE_DIMENSIONS / 2) {
-        X.value = withTiming(0);
-      } else {
-        X.value = withTiming(H_SWIPE_RANGE);
-        runOnJS(handleComplete)();
-      }
-    },
-  });
+        if (newValue >= 0 && newValue <= H_SWIPE_RANGE) {
+          X.value = newValue;
+        }
+      },
+      onEnd: () => {
+        if (X.value < BUTTON_WIDTH / 2 - SWIPEABLE_DIMENSIONS / 2) {
+          X.value = withTiming(0);
+          runOnJS(handleStart)();
+        } else {
+          X.value = withTiming(H_SWIPE_RANGE);
+          runOnJS(handleFinish)();
+        }
+      },
+    });
 
-  const InterpolateXInput = [0, H_SWIPE_RANGE];
-  const AnimatedStyles = {
-    colorWave: useAnimatedStyle(() => {
-      return {
-        width: H_WAVE_RANGE + X.value,
+    const InterpolateXInput = [0, H_SWIPE_RANGE];
+    const AnimatedStyles = {
+      colorWave: useAnimatedStyle(() => {
+        return {
+          width: H_WAVE_RANGE + X.value,
 
-        opacity: interpolate(X.value, InterpolateXInput, [0, 1]),
-      };
-    }),
-    swipeable: useAnimatedStyle(() => {
-      return {
-        backgroundColor: interpolateColor(
-          X.value,
-          [0, BUTTON_WIDTH - SWIPEABLE_DIMENSIONS - BUTTON_PADDING],
-          ["#FFF", "#FFF"]
-        ),
-        transform: [{ translateX: X.value }],
-      };
-    }),
-    swipeText: useAnimatedStyle(() => {
-      return {
-        opacity: interpolate(
-          X.value,
-          InterpolateXInput,
-          [1, 0],
-          Extrapolate.CLAMP
-        ),
-        transform: [
-          {
-            translateX: interpolate(
-              X.value,
-              InterpolateXInput,
-              [0, BUTTON_WIDTH / 2 - SWIPEABLE_DIMENSIONS],
-              Extrapolate.CLAMP
-            ),
-          },
-        ],
-      };
-    }),
-  };
+          opacity: interpolate(X.value, InterpolateXInput, [0, 1]),
+        };
+      }),
+      swipeable: useAnimatedStyle(() => {
+        return {
+          backgroundColor: interpolateColor(
+            X.value,
+            [0, BUTTON_WIDTH - SWIPEABLE_DIMENSIONS - BUTTON_PADDING],
+            ["#FFF", "#FFF"]
+          ),
+          transform: [{ translateX: X.value }],
+        };
+      }),
+      swipeText: useAnimatedStyle(() => {
+        return {
+          opacity: interpolate(
+            X.value,
+            InterpolateXInput,
+            [1, 0],
+            Extrapolate.CLAMP
+          ),
+          transform: [
+            {
+              translateX: interpolate(
+                X.value,
+                InterpolateXInput,
+                [0, BUTTON_WIDTH / 2 - SWIPEABLE_DIMENSIONS],
+                Extrapolate.CLAMP
+              ),
+            },
+          ],
+        };
+      }),
+    };
 
-  return (
-    <Animated.View style={styles.swipeCont}>
-      <PanGestureHandler onGestureEvent={animatedGestureHandler}>
-        <Animated.View
-          style={[styles.swipeable, AnimatedStyles.swipeable]}
-        ></Animated.View>
-      </PanGestureHandler>
-      <Animated.Text style={[styles.swipeText, AnimatedStyles.swipeText]}>
-        Swipe to confirm
-      </Animated.Text>
-    </Animated.View>
-  );
-};
+    React.useImperativeHandle(ref, () => ({ handleStart }));
+
+    return (
+      <Animated.View style={styles.swipeCont}>
+        <PanGestureHandler onGestureEvent={animatedGestureHandler}>
+          <Animated.View style={[styles.swipeable, AnimatedStyles.swipeable]} />
+        </PanGestureHandler>
+        <Animated.Text style={[styles.swipeText, AnimatedStyles.swipeText]}>
+          Swipe button
+        </Animated.Text>
+      </Animated.View>
+    );
+  }
+);
 
 const styles = StyleSheet.create({
   container: {
@@ -127,7 +132,7 @@ const styles = StyleSheet.create({
   swipeCont: {
     height: BUTTON_HEIGHT,
     width: BUTTON_WIDTH,
-    backgroundColor: "#FF00FF",
+    backgroundColor: "#FED052",
     borderRadius: BUTTON_HEIGHT / 2,
     padding: BUTTON_PADDING,
     display: "flex",
@@ -154,10 +159,10 @@ const styles = StyleSheet.create({
   },
   swipeText: {
     alignSelf: "center",
-    fontSize: 20,
-    fontWeight: "bold",
+    fontSize: 14,
+    fontWeight: "normal",
     zIndex: 2,
-    color: "#FFF",
+    color: "#000",
   },
 });
 

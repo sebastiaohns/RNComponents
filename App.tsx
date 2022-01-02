@@ -1,4 +1,4 @@
-import Main from "./src/pages/MainKeypad";
+import Main from "./src/Main";
 
 export default function App() {
   return <Main />;

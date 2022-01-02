@@ -15,7 +15,7 @@ const Wrapper: FC<IProps> = ({ children }) => {
           <StatusBar
             translucent
             barStyle="dark-content"
-            backgroundColor="#F7EFFA"
+            backgroundColor="#FFFFFF"
           />
         </View>
 
@@ -30,12 +30,12 @@ const BAR_HEIGHT = StatusBar.currentHeight;
 const styles = StyleSheet.create({
   topSafeArea: {
     flex: 0,
-    backgroundColor: "#F7EFFA",
+    backgroundColor: "#FFFFFF",
   },
 
   bottomSafeArea: {
     flex: 1,
-    backgroundColor: "#FCF8ED",
+    backgroundColor: "#FFFFFF",
   },
 
   statusBar: {

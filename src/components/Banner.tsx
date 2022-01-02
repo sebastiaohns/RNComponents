@@ -143,7 +143,10 @@ const styles = StyleSheet.create({
 
   banner: {
     zIndex: 3,
+    width: "100%",
     position: "absolute",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 
