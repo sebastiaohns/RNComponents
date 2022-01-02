@@ -120,16 +120,20 @@ To get a local copy up and running follow these simple steps.
 Below there's a demostration video of the components being used. Each component has a demo file that can be run and used to understand the funcionality of the component, also showing how to use it.
 
 - [Banner](src/demos/BannerMain.tsx): pop up element that slide in from bottom to the center of the page.
-  ![](docs/banner.gif | height=400)
+  
+  <img src="./docs/banner.gif" width="251,52" height="500">
 
 - [Modal](src/demos/ModalMain.tsx): pop up element that slide in the bottom of the page.
-  ![](docs/modal.gif | height=400)
+  
+  <img src="docs/modal.gif" width="251,52" height="500">
 
 - [Numpad](src/demos/MainNumpad.tsx): in screen keypad that is used to insert values.
-  ![](docs/numpad.gif | height=400)
+  
+  <img src="docs/numpad.gif" width="251,52" height="500">
 
 - [Swipe button](src/demos/MainSwipe.tsx): element that use swipe gesture to trigger funcionality.
-  ![](docs/swipe.gif | height=400)
+
+  <img src="docs/swipe.gif" width="251,52" height="500">
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
